@@ -52,6 +52,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/system #{release_path}/public/system"
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
+    run "ln -nfs #{deploy_to}/current #{release_path}"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
@@ -70,7 +71,7 @@ namespace :deploy do
   task :assets do
     run("cd #{deploy_to}/current && bundle exec rake assets:precompile RAILS_ENV=production")
   end
-  after "deploy:finalize_update", "deploy:assets"
+  # after "deploy:finalize_update", "deploy:assets"
 
   after 'deploy:restart', 'unicorn:reload'    # app IS NOT preloaded
   after 'deploy:restart', 'unicorn:restart'   # app preloaded

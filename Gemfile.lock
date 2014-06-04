@@ -229,6 +229,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby
   capistrano
   capistrano-unicorn
   client_side_validations
