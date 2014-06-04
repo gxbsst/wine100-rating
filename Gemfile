@@ -1,17 +1,18 @@
 #source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.16'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'mysql2'
-gem 'passenger'
-
+# gem 'passenger'
+gem 'unicorn'
 group :development, :test do
-  gem "better_errors", '0.2.0'
-  gem "binding_of_caller", '0.6.8'
-  gem 'pry'  # "binding.pry" in action
+  # gem "better_errors"
+  # gem "binding_of_caller"
+  # gem 'pry'  # "binding.pry" in action
   gem 'sextant'
+  gem 'capistrano-unicorn', :require => false
 end
 
 
@@ -51,7 +52,7 @@ gem 'jquery-rails', '~> 2.0.0'
 # gem 'debugger'
 
 # Refinery CMS
-gem 'refinerycms', '~> 2.0.0', :git => 'git://github.com/refinery/refinerycms.git', :branch => '2-0-stable'
+gem 'refinerycms', '~> 2.0.0'#, :git => 'git://github.com/refinery/refinerycms.git', :branch => '2-0-stable'
 
 # Specify additional Refinery CMS Extensions here (all optional):
 gem 'refinerycms-i18n', '~> 2.0.0'
