@@ -7,4 +7,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require lib/jquery/plugins/plugin
+//= require lib/angular/angular
+//= require lib/angular/modules/angular-resource
+//= require lib/angular/modules/angular-route
+//= require lib/angular/modules/angular-sanitize
+//= require swfupload
+//= require base
+//= require app
 //= require_tree .
