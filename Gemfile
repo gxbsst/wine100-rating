@@ -7,6 +7,8 @@ gem 'rails', '3.2.12'
 gem 'mysql2'
 gem 'passenger'
 
+gem "cancan"
+
 group :development, :test do
   gem "better_errors", '0.2.0'
   gem "binding_of_caller", '0.6.8'

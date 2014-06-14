@@ -1,7 +1,6 @@
 
 <div class="row-fluid">
   <%= render :partial => 'sidebar' %>
-
   <div class="span9 row">
     <% @wine_group.wine_group_items.each do |item| %>
 
@@ -23,6 +22,24 @@
             <td class="aleft">Sugar Content/含糖量:</td>
             <td><%= item.wine.sugar %></td>
           </tr>
+          <% if current_user.leader? %>
+              <tr>
+                <td class="aleft">Award/颁奖:</td>
+                <td>
+                  <button ng-init="award_value[<%= item.id %>]=<%= item.award_value  %>" ng-class="{'btn-primary':award_value[<%= item.id %>]==1}"  type="button" class="btn" ng-click="award(<%= current_user.id %>,<%= item.id %>,1)" >金奖/GOLD</button>
+                  <button ng-init="award_value[<%= item.id %>]=<%= item.award_value  %>"  ng-class="{'btn-primary':award_value[<%= item.id %>]==2}"  type="button" class="btn" ng-click="award(<%= current_user.id %>,<%= item.id %>,2)" >银奖/SILVER</button>
+                  <button ng-init="award_value[<%= item.id %>]=<%= item.award_value  %>"  ng-class="{'btn-primary':award_value[<%= item.id %>]==3}"  type="button" class="btn" ng-click="award(<%= current_user.id %>,<%= item.id %>,3)" >铜奖/BRONZE</button>
+                </td>
+              </tr>
+              <tr  ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  ng-if="final_award_value[<%= item.id %>]!=0">
+                <td>Final Award/最终获奖:</td>
+                <td>
+                  <button ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-show="final_award_value[<%= item.id %>]==1">金奖/GOLD</button>
+                  <button ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-if="final_award_value[<%= item.id %>]==2">银奖/SILVER</button>
+                  <button ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-if="final_award_value[<%= item.id %>]==3">铜奖/BRONZE</button>
+                </td>
+              </tr>
+          <% end %>
         </table>
         <div class="form_outer" id="form_<%= item.wine_id %>">
           <a class="open_toggle"  href="javascript:void(0)">写拼酒辞</a>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  refinery_test_paper_id: 1
+  award: MyString
+  user_id: 1
+  final: MyString
+
+two:
+  refinery_test_paper_id: 1
+  award: MyString
+  user_id: 1
+  final: MyString

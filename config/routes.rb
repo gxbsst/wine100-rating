@@ -1,5 +1,7 @@
 Wine100::Application.routes.draw do
 
+  resources :awards
+
   get "challenges/create"
 
   root :to => 'challenges#index'
