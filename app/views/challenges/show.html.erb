@@ -26,27 +26,29 @@
               <tr>
                 <td class="aleft">Award/颁奖:</td>
                 <td>
-                  <button ng-init="award_value[<%= item.id %>]=<%= item.award_value  %>" ng-class="{'btn-primary':award_value[<%= item.id %>]==1}"  type="button" class="btn" ng-click="award(<%= current_user.id %>,<%= item.id %>,1)" >金奖/GOLD</button>
-                  <button ng-init="award_value[<%= item.id %>]=<%= item.award_value  %>"  ng-class="{'btn-primary':award_value[<%= item.id %>]==2}"  type="button" class="btn" ng-click="award(<%= current_user.id %>,<%= item.id %>,2)" >银奖/SILVER</button>
-                  <button ng-init="award_value[<%= item.id %>]=<%= item.award_value  %>"  ng-class="{'btn-primary':award_value[<%= item.id %>]==3}"  type="button" class="btn" ng-click="award(<%= current_user.id %>,<%= item.id %>,3)" >铜奖/BRONZE</button>
+                  <button ng-init="award_value[<%= item.wine_id %>]=<%= item.award_value  %>" ng-class="{'btn-primary':award_value[<%= item.wine_id %>]==1}"  type="button" class="btn" ng-click="award(<%= item.wine.id %>, 1)" >金奖/GOLD</button>
+                  <button ng-init="award_value[<%= item.wine_id %>]=<%= item.award_value  %>"  ng-class="{'btn-primary':award_value[<%= item.wine_id %>]==2}"  type="button" class="btn" ng-click="award(<%= item.wine.id %>, 2)" >银奖/SILVER</button>
+                  <button ng-init="award_value[<%= item.wine_id %>]=<%= item.award_value  %>"  ng-class="{'btn-primary':award_value[<%= item.wine_id %>]==3}"  type="button" class="btn" ng-click="award(<%= item.wine.id %>, 3)" >铜奖/BRONZE</button>
                 </td>
               </tr>
-              <tr  ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  ng-if="final_award_value[<%= item.id %>]!=0">
+              <tr  ng-init="final_award_value[<%= item.wine_id %>]=<%= item.final_award_value %>"  ng-if="final_award_value[<%= item.id %>]!=0">
                 <td>Final Award/最终获奖:</td>
                 <td>
-                  <button ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-show="final_award_value[<%= item.id %>]==1">金奖/GOLD</button>
-                  <button ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-if="final_award_value[<%= item.id %>]==2">银奖/SILVER</button>
-                  <button ng-init="final_award_value[<%= item.id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-if="final_award_value[<%= item.id %>]==3">铜奖/BRONZE</button>
+                  <button ng-init="final_award_value[<%= item.wine_id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-show="final_award_value[<%= item.wine_id %>]==1">金奖/GOLD</button>
+                  <button ng-init="final_award_value[<%= item.wine_id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-if="final_award_value[<%= item.wine_id %>]==2">银奖/SILVER</button>
+                  <button ng-init="final_award_value[<%= item.wine_id %>]=<%= item.final_award_value %>"  class="btn btn-primary" ng-if="final_award_value[<%= item.wine_id %>]==3">铜奖/BRONZE</button>
                 </td>
               </tr>
           <% end %>
         </table>
+
         <div class="form_outer" id="form_<%= item.wine_id %>">
           <a class="open_toggle"  href="javascript:void(0)">写拼酒辞</a>
           <%= form_for item.test_paper(current_user), :url => c_path(item.test_paper(current_user)),  :html => {:class => "form"}, :remote => true, :validate => true do |f|  %>
               <%= f.hidden_field :wine_id %>
               <%= f.hidden_field :group_id %>
               <%= f.hidden_field :user_id %>
+              <%= f.hidden_field :group_item_id, :value => item.id %>
               <table class="table">
                 <tr>
                   <td >
@@ -90,6 +92,24 @@
 
         </div>
         <!--end form_outer-->
+    <% end %>
+    <% if current_user.leader? %>
+    <div algin="center">
+      <table width="100%">
+        <tr>
+          <td align="center">
+
+            <% if @wine_group.complete? %>
+                <a class="btn btn-large" type="button" href="/wine_groups/<%=@wine_group.id %>/cancel">取消提交</a>
+            <% elsif @wine_group.cancel? %>
+                <a type="button" class="btn btn-primary btn-large" href="/wine_groups/<%= @wine_group.id %>/complete">提交</a>
+             <% else %>
+                <a type="button" class="btn btn-primary btn-large" href="/wine_groups/<%= @wine_group.id %>/complete">提交</a>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
     <% end %>
   </div>
 

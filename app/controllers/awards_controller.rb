@@ -3,9 +3,9 @@ class AwardsController < ApplicationController
   before_filter :authenticate_user
 
   def create
-    award = Award.find_or_create_by_refinery_wine_groups_wine_group_item_id(params['wine_group_item_id'])
-    award.refinery_member_id = current_user.id
+    award = Award.find_or_initialize_by_wine_id_and_refinery_member_id(params['wine_id'], current_user.id)
     award.award = params['award']
+    award.wine_id = params['wine_id']
     if award.save!
       render :json => award, :status => :ok
     else

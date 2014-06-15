@@ -25,7 +25,7 @@ module Refinery
 
       def final_award_value
         return 0 unless self.award
-        self.award.final || 0
+        self.award.final
       end
 
       # def title was created automatically because you didn't specify a string field

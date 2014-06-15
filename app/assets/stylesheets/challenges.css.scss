@@ -1,5 +1,5 @@
 .table td{
-    border: 0;
+  border: 0;
 }
 
 textarea#test_paper_note {
@@ -9,4 +9,34 @@ textarea#test_paper_note {
 td.aleft {
   text-align: right;
   font-weight: bold;
+}
+
+.note-table {
+  tr td {
+    background: #EEE;
+  }
+  tr.white td {
+    background: #FFF;
+  }
+}
+.award-item.current {
+  background: #ffff73;
+  .table-striped tbody {
+    tr > td{
+      background: transparent;
+    }
+    tr > th{
+      background: transparent;
+    }
+  }
+
+  .note-table {
+    tr td {
+      background: transparent;
+    }
+    tr.white td {
+      background: transparent;
+    }
+  }
+
 }

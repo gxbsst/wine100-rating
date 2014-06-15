@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140614151646) do
+ActiveRecord::Schema.define(:version => 20140615030800) do
 
   create_table "awards", :force => true do |t|
     t.integer  "refinery_wine_groups_wine_group_item_id"
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(:version => 20140614151646) do
     t.string   "final"
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
+    t.integer  "wine_id"
+    t.integer  "group_id"
+    t.integer  "final_user_id"
   end
 
   create_table "refinery_images", :force => true do |t|
@@ -199,6 +202,7 @@ ActiveRecord::Schema.define(:version => 20140614151646) do
     t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
   end
 
   create_table "refinery_wine_groups_wine_group_items", :force => true do |t|

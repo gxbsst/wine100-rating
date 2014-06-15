@@ -3,4 +3,7 @@ class User < ::Refinery::Members::Member
   def leader?
     self.role == 'leader'
   end
+  def e_group?
+    self.role == 'e_group'
+  end
 end

@@ -9,6 +9,18 @@ module Refinery
 
       validates :name_zh, :presence => true, :uniqueness => true
 
+      has_one :award, :class_name => '::Award', :foreign_key => 'wine_id'
+
+      def award_value
+        return 0 unless self.award
+        self.award.award
+      end
+
+      def final_award_value
+        return 0 unless self.award
+        self.award.final || 0
+      end
+
       def name
         "#{vingate} #{name_en}  #{vingate} #{name_zh}"
       end

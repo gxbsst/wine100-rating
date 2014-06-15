@@ -16,7 +16,7 @@ group :development, :test do
   gem 'sextant'
 end
 
-
+gem 'kaminari'
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'client_side_validations'
