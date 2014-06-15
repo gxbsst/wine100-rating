@@ -17,7 +17,6 @@ module Refinery
         Refinery::TestPapers::TestPaper.find_or_initialize_by_user_id_and_wine_id_and_group_id(user.id, self.wine_id, self.group_id)
       end
 
-
       def award_value
         return 0 unless self.award
         self.award.award
@@ -25,7 +24,7 @@ module Refinery
 
       def final_award_value
         return 0 unless self.award
-        self.award.final
+        self.award.final.to_i
       end
 
       # def title was created automatically because you didn't specify a string field

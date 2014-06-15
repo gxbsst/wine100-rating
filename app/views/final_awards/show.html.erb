@@ -1,6 +1,7 @@
 <div class="row-fluid">
-  <%= render :partial => 'sidebar' %>
+  <%= render :partial => 'challenges/sidebar' %>
   <div class="span9 row">
+    <%= render :partial => 'notify' %>
     <div class="page-header">
       <h2><%= @wine_group.name %></h2>
     </div>
@@ -31,9 +32,9 @@
             <tr>
               <td class="aleft">Award/颁奖:</td>
               <td>
-                <button ng-init="award_value[<%= item.wine_id %>]=<%= item.wine.award_value %>"  class="btn btn-primary" ng-show="award_value[<%= item.wine.id %>]==1">金奖/GOLD</button>
-                <button ng-init="award_value[<%= item.wine_id %>]=<%= item.wine.award_value %>"  class="btn btn-primary" ng-if="award_value[<%= item.wine.id %>]==2">银奖/SILVER</button>
-                <button ng-init="award_value[<%= item.wine_id %>]=<%= item.wine.award_value %>"  class="btn btn-primary" ng-if="award_value[<%= item.wine.id %>]==3">铜奖/BRONZE</button>
+                <button ng-init="award_value[<%= item.wine_id %>]=<%= item.wine.award_value %> || 0"  class="btn btn-primary" ng-show="award_value[<%= item.wine.id %>]==1">金奖/GOLD</button>
+                <button ng-init="award_value[<%= item.wine_id %>]=<%= item.wine.award_value %> || 0"  class="btn btn-primary" ng-if="award_value[<%= item.wine.id %>]==2">银奖/SILVER</button>
+                <button ng-init="award_value[<%= item.wine_id %>]=<%= item.wine.award_value %> || 0"  class="btn btn-primary" ng-if="award_value[<%= item.wine.id %>]==3">铜奖/BRONZE</button>
               </td>
             </tr>
           </table>

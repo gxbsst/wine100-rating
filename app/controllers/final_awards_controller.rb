@@ -4,10 +4,11 @@ class FinalAwardsController < ApplicationController
   before_filter :e_group?
 
   def index
-   page = params[:page] || 1
-   per = 50
-   @wine_groups = Refinery::WineGroups::WineGroup.complete.page(page).per_page(per)
-   @test_papers =  Refinery::TestPapers::TestPaper.includes(:wine).order('created_at DESC').page(page).per_page(per)
+    @complete_count = Refinery::WineGroups::WineGroup.complete.count
+    page = params[:page] || 1
+    per = 50
+    @page_wine_groups = Refinery::WineGroups::WineGroup.complete.page(page).per_page(per)
+    wine_groups
   end
 
   def create
@@ -22,7 +23,10 @@ class FinalAwardsController < ApplicationController
   end
 
   def show
+    @complete_count = Refinery::WineGroups::WineGroup.complete.count
     set_wine_group
+    wine_groups
+    @user_group_info = @wine_group.wine_group_items.first.test_papers.first.group rescue nil
   end
 
   private
@@ -33,5 +37,9 @@ class FinalAwardsController < ApplicationController
 
   def set_wine_group
     @wine_group ||= Refinery::WineGroups::WineGroup.find(params[:id])
+  end
+
+  def wine_groups
+    @wine_groups = Refinery::WineGroups::WineGroup.all
   end
 end

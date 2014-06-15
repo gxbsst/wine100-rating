@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140615030800) do
+ActiveRecord::Schema.define(:version => 20140615133223) do
 
   create_table "awards", :force => true do |t|
     t.integer  "refinery_wine_groups_wine_group_item_id"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20140615030800) do
     t.datetime "updated_at",     :null => false
     t.integer  "group_item_id"
     t.integer  "wine_group_id"
+    t.integer  "user_group_id"
   end
 
   add_index "refinery_test_papers", ["wine_group_id"], :name => "index_refinery_test_papers_on_wine_group_id"

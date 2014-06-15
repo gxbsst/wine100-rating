@@ -13,12 +13,12 @@ module Refinery
 
       def award_value
         return 0 unless self.award
-        self.award.award
+        self.award.award.to_i
       end
 
       def final_award_value
         return 0 unless self.award
-        self.award.final || 0
+        self.award.final.to_i
       end
 
       def name

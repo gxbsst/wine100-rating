@@ -3,9 +3,8 @@ APP.controller 'MainController', ($scope, $window, $document, $http) ->
   $scope.hover = {}
   $scope.award_value = {}
   $scope.final_award_value = {}
-#  $scope.final_award_value[96]=2
   $scope.award = (wine_id, award) ->
-    $http.post('/awards.json', { wine_id: wine_id, 'award': award}, {cache: false})
+    $http.post('/awards.json', { wine_id: wine_id, 'award': award})
     .success((data, status, headers, config) ->
       $scope.award_value[wine_id] = data.award
     )
@@ -22,7 +21,7 @@ APP.controller 'MainController', ($scope, $window, $document, $http) ->
       alert(status)
     )
 
-.controller 'ProgressController',   ($scope, $window, $document, $http, $timeout) ->
+.controller 'ProgressController', ($scope, $window, $document, $http, $timeout) ->
 
   $scope.getPercent = ->
     $http.get('/wine_groups/progress.json')
@@ -41,7 +40,24 @@ APP.controller 'MainController', ($scope, $window, $document, $http) ->
 
   $scope.intervalFunction()
 
+.controller 'NotifyController', ($scope, $window, $document, $http, $timeout) ->
 
+  $scope.getCompleteCount = ->
+    $http.get('/wine_groups.json')
+    .success((data, status, headers, config) ->
+      $scope.now_complete_count = data.complete_count
+    )
+
+  $scope.intervalFunction = ->
+    $timeout(
+      ->
+        $scope.getCompleteCount()
+        $scope.intervalFunction()
+    ,
+      30000
+    )
+
+  $scope.intervalFunction()
 
 
 

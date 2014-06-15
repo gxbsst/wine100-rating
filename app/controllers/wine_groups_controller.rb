@@ -2,6 +2,14 @@ class WineGroupsController < ApplicationController
   respond_to :html, :xml, :js
   before_filter :authenticate_user
 
+  def index
+    @complete_count = Refinery::WineGroups::WineGroup.complete.count
+    respond_to do |format|
+      format.html
+      format.json { render :json => {:complete_count => @complete_count}}
+    end
+  end
+
   def progress
     # redirect_to root_path  unless current_user.leader?
     @wine_groups = Refinery::WineGroups::WineGroup.all
