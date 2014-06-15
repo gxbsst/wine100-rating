@@ -22,4 +22,28 @@ APP.controller 'MainController', ($scope, $window, $document, $http) ->
       alert(status)
     )
 
+.controller 'ProgressController',   ($scope, $window, $document, $http, $timeout) ->
+
+  $scope.getPercent = ->
+    $http.get('/wine_groups/progress.json')
+    .success((data, status, headers, config) ->
+      $scope.percent = data.percent
+    )
+
+  $scope.intervalFunction = ->
+    $timeout(
+      ->
+        $scope.getPercent()
+        $scope.intervalFunction()
+      ,
+      1000
+    )
+
+  $scope.intervalFunction()
+
+
+
+
+
+
 

@@ -13,6 +13,9 @@ Wine100::Application.routes.draw do
       get :cancel
       get :complete
     end
+    collection do
+      get :progress
+    end
   end
 
   resources :challenges
